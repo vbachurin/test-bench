@@ -1,13 +1,24 @@
 # Performance testing
 
-How to run:
+How to create the Example App docker image:
+1. Make sure that in the console you run SBT from, the Docker env variables are set 
+  If not, set them (for non-native Docker VM, use the `docker-machine env` output)
+2. Create a docker image using SBT:
+    cd services
+    
+    sbt example/docker:publishLocal
+    
+3. The previous command creates a `pulse/example:0.1-SNAPSHOT` Docker image, which will be used in docker-compose
+
+
+How to run the stack using the docker-compose:
 
     cd service
     docker-compose up --force-recreate -d
     cd gatling-load-1
     sbt gatling:testOnly
 
-Dashboard with metrics vizualization:
+Dashboard with metrics vizualization (credentials: `admin/admin`):
 
     http://<DOCKER_HOST>/dashboard/file/dashboard.json
     
